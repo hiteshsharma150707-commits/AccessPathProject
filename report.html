@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccessPath | Report an Issue</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+    <aside class="sidebar">
+        <a href="index.html" class="brand">
+            <span class="brand-icon">A</span>
+            <span><b>AccessPath</b><small>Smart Campus Navigation</small></span>
+        </a>
+
+        <nav>
+            <a href="index.html" class="nav-link">⌂ Dashboard</a>
+            <a href="planner.html" class="nav-link">⌖ Route Planner</a>
+            <a href="map.html" class="nav-link">▦ Campus Map</a>
+            <a href="report.html" class="nav-link active">⚑ Report an Issue</a>
+            <a href="about.html" class="nav-link">ⓘ About</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>ACCESSIBLE CAMPUS</p>
+            <b>Navigation for Everyone</b>
+            <small>SVIET Campus Prototype</small>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <h2>Report an Issue</h2>
+                <p>Help us improve campus accessibility.</p>
+            </div>
+            <span class="status">● Feedback</span>
+        </header>
+
+        <section class="panel">
+            <span class="eyebrow">CAMPUS FEEDBACK</span>
+            <h1 class="page-title">Report an Accessibility Problem</h1>
+            <p class="page-description">
+                Inform the campus team about an accessibility issue.
+            </p>
+
+            <form id="reportForm" class="form-layout report-layout">
+
+                <div class="form-group">
+                    <label for="issueLocation">Select Location</label>
+                    <select id="issueLocation" required>
+                        <option value="">Choose a location</option>
+                        <option>Main Gate</option>
+                        <option>CSE Block</option>
+                        <option>Building 1</option>
+                        <option>Building 2</option>
+                        <option>Building 3</option>
+                        <option>Building 4</option>
+                        <option>Building 5</option>
+                        <option>Building 6</option>
+                        <option>Building 7</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="issueType">Issue Type</label>
+                    <select id="issueType" required>
+                        <option value="">Choose an issue</option>
+                        <option>Blocked Pathway</option>
+                        <option>Damaged Ramp</option>
+                        <option>Lift Not Working</option>
+                        <option>Staircase Problem</option>
+                        <option>Inaccessible Entrance</option>
+                        <option>Other Accessibility Issue</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="issueDescription">Describe the Issue</label>
+                    <textarea id="issueDescription"
+                              placeholder="Write a description of the problem..."
+                              required></textarea>
+                </div>
+
+                <button type="submit" class="primary-btn">
+                    Submit Report →
+                </button>
+            </form>
+
+            <div id="reportMessage" class="message" hidden></div>
+        </section>
+
+        <section class="panel">
+            <span class="eyebrow">WHY REPORT?</span>
+            <h2>Help Make the Campus Accessible</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <b>01</b>
+                    <h3>Identify</h3>
+                    <p>Identify an accessibility problem.</p>
+                </div>
+                <div class="step-card">
+                    <b>02</b>
+                    <h3>Report</h3>
+                    <p>Submit its location and description.</p>
+                </div>
+                <div class="step-card">
+                    <b>03</b>
+                    <h3>Improve</h3>
+                    <p>Help the campus team address the issue.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>AccessPath © 2026 | SVIET Campus Navigation Prototype</footer>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

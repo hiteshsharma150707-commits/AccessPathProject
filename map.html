@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccessPath | Campus Map</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+    <aside class="sidebar">
+        <a href="index.html" class="brand">
+            <span class="brand-icon">A</span>
+            <span><b>AccessPath</b><small>Smart Campus Navigation</small></span>
+        </a>
+
+        <nav>
+            <a href="index.html" class="nav-link">⌂ Dashboard</a>
+            <a href="planner.html" class="nav-link">⌖ Route Planner</a>
+            <a href="map.html" class="nav-link active">▦ Campus Map</a>
+            <a href="report.html" class="nav-link">⚑ Report an Issue</a>
+            <a href="about.html" class="nav-link">ⓘ About</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>ACCESSIBLE CAMPUS</p>
+            <b>Navigation for Everyone</b>
+            <small>SVIET Campus Prototype</small>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <h2>Campus Map</h2>
+                <p>Explore the SVIET campus layout.</p>
+            </div>
+            <span class="status">● Map View</span>
+        </header>
+
+        <section class="panel">
+            <span class="eyebrow">SVIET CAMPUS</span>
+            <h1 class="page-title">Interactive Campus Map</h1>
+            <p class="page-description">
+                View the buildings, entrance and connecting pathways.
+            </p>
+
+            <div class="map-legend">
+                <span><i class="legend-dot green"></i> Main Gate</span>
+                <span><i class="legend-dot blue"></i> Buildings</span>
+                <span><i class="legend-dot red"></i> Selected Route</span>
+            </div>
+
+            <div class="map-wrapper">
+                <svg id="campusMap" viewBox="0 0 1000 600"
+                     xmlns="http://www.w3.org/2000/svg">
+
+                    <defs>
+                        <pattern id="grass" width="35" height="35"
+                                 patternUnits="userSpaceOnUse">
+                            <rect width="35" height="35" fill="#e9f0e4"/>
+                            <circle cx="8" cy="10" r="1.5" fill="#ccddc3"/>
+                            <circle cx="26" cy="25" r="1.5" fill="#ccddc3"/>
+                        </pattern>
+                    </defs>
+
+                    <rect width="1000" height="600" fill="url(#grass)"/>
+
+                    <rect x="350" y="210" width="260" height="120"
+                          rx="15" fill="#dcebd5"/>
+
+                    <!-- Roads -->
+                    <g class="roads">
+                        <path d="M900 465 L800 420 L700 385 L580 365 L430 365 L260 365"/>
+                        <path d="M700 385 L700 285 L620 220"/>
+                        <path d="M580 365 L550 270 L450 190"/>
+                        <path d="M430 365 L350 280 L250 300"/>
+                        <path d="M800 420 L820 300"/>
+                    </g>
+
+                    <!-- Highway -->
+                    <path d="M820 600 L1000 440"
+                          stroke="#9ca3af" stroke-width="65" fill="none"/>
+                    <path d="M820 600 L1000 440"
+                          stroke="white" stroke-width="3"
+                          stroke-dasharray="18 14" fill="none"/>
+
+                    <!-- CSE Block -->
+                    <g class="building" data-node="cse">
+                        <rect x="155" y="225" width="185" height="105"
+                              rx="8" fill="#2878c7"
+                              stroke="#174a7c" stroke-width="4"/>
+                        <text x="247" y="270" fill="white">CSE</text>
+                        <text x="247" y="295" fill="white">Block</text>
+                    </g>
+
+                    <!-- Other buildings -->
+                    <g class="building" data-node="b1">
+                        <rect x="370" y="100" width="130" height="85" rx="6"/>
+                        <text x="435" y="145">Building 1</text>
+                    </g>
+                    <g class="building" data-node="b2">
+                        <rect x="520" y="95" width="115" height="90" rx="6"/>
+                        <text x="577" y="145">Building 2</text>
+                    </g>
+                    <g class="building" data-node="b3">
+                        <rect x="665" y="110" width="120" height="90" rx="6"/>
+                        <text x="725" y="160">Building 3</text>
+                    </g>
+                    <g class="building" data-node="b4">
+                        <rect x="115" y="390" width="125" height="75" rx="6"/>
+                        <text x="177" y="432">Building 4</text>
+                    </g>
+                    <g class="building" data-node="b5">
+                        <rect x="310" y="410" width="125" height="75" rx="6"/>
+                        <text x="372" y="452">Building 5</text>
+                    </g>
+                    <g class="building" data-node="b6">
+                        <rect x="510" y="430" width="130" height="75" rx="6"/>
+                        <text x="575" y="472">Building 6</text>
+                    </g>
+                    <g class="building" data-node="b7">
+                        <rect x="730" y="440" width="105" height="65" rx="6"/>
+                        <text x="782" y="480">Building 7</text>
+                    </g>
+
+                    <!-- Main Gate -->
+                    <circle cx="900" cy="465" r="22"
+                            fill="#16a34a" stroke="white" stroke-width="5"/>
+                    <text x="900" y="510" text-anchor="middle"
+                          fill="#166534" font-size="20"
+                          font-weight="bold">MAIN GATE</text>
+
+                    <!-- Route -->
+                    <polyline id="routeLine" points=""
+                              fill="none" stroke="#ef4444"
+                              stroke-width="9"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+
+                    <!-- Navigation points -->
+                    <g id="mapPoints">
+                        <circle id="gate" cx="900" cy="465" r="8" fill="#16a34a"/>
+                        <circle id="cse" cx="247" cy="300" r="8" fill="#2563eb"/>
+                        <circle id="b1" cx="435" cy="185" r="8" fill="#2563eb"/>
+                        <circle id="b2" cx="577" cy="185" r="8" fill="#2563eb"/>
+                        <circle id="b3" cx="725" cy="200" r="8" fill="#2563eb"/>
+                        <circle id="b4" cx="177" cy="390" r="8" fill="#2563eb"/>
+                        <circle id="b5" cx="372" cy="410" r="8" fill="#2563eb"/>
+                        <circle id="b6" cx="575" cy="430" r="8" fill="#2563eb"/>
+                        <circle id="b7" cx="782" cy="440" r="8" fill="#2563eb"/>
+                    </g>
+                </svg>
+            </div>
+
+            <p class="map-note">
+                Provisional campus diagram. Building positions and routes
+                must be verified before real-world use.
+            </p>
+
+            <div id="mapResult" class="message" hidden></div>
+
+            <a href="planner.html" class="primary-btn">
+                Plan Another Route →
+            </a>
+        </section>
+
+        <footer>AccessPath © 2026 | SVIET Campus Navigation Prototype</footer>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
